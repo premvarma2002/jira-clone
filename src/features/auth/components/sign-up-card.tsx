@@ -142,7 +142,7 @@ export const SignUpCard = () => {
     <CardContent className="p-7 flex items-center justify-center">
      <p>
       Already have an account?
-      <Link href="/sign-up">
+      <Link href="/sign-in">
       <span className="text-blue-700">&nbsp;Sign in</span>
       </Link>
      </p>
