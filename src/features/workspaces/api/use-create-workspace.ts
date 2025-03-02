@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { InferRequestType, InferResponseType } from "hono";
 
@@ -16,10 +17,17 @@ export const useCreateWorkspace = () => {
     >({
      mutationFn: async ({ json }) => {
         const response = await client.api.workspaces["$post"]({ json });
+        if (!response.ok){
+         throw new Error("Failed create workspace");
+      }
         return await response.json();
      },
      onSuccess:() => {
+        toast.success("Workspace created");
         queryClient.invalidateQueries({ queryKey:["workspaces"]})
+     },
+     onError: () => {
+      toast.error("Failed to create workspace");
      }
     });
 
